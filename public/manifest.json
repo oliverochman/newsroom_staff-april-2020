@@ -1,0 +1,8 @@
+{
+  "short_name": "Daily News Sense",
+  "name": "News app with news that makes sense",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
