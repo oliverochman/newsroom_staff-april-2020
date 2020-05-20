@@ -33,6 +33,10 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^4.5.0"
+    "cypress": "^4.5.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^26.0.1",
+    "react-test-renderer": "^16.13.1"
   }
 }
