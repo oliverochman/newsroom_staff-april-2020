@@ -3,7 +3,7 @@ describe('Journalist can create an article', () => {
     cy.server()
     cy.route({
       method: "POST",
-      url: "/articles",
+      url: "http://localhost:3000/api/articles*",
       response: "fixture:success_message.json"
     })
     cy.visit("/")
