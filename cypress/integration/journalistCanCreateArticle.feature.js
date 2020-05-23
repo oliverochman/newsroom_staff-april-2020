@@ -11,7 +11,7 @@ describe('Journalist can create an article', () => {
 
   it('successfully with title and body', () => {
     cy.get('input#title').type('This is the title')
-    cy.get('input#body').type('This is the body this is the body this is the body this is the body this is the body.')
+    cy.get('textarea#body').type('This is the body this is the body this is the body this is the body this is the body.')
     cy.get('#post').click()
     cy.get('#message').should('contain', 'Article successfully created!')
   })

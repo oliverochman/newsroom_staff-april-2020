@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button, Input } from "semantic-ui-react"
 
 const CreateArticle = () => {
   
@@ -8,13 +8,13 @@ const CreateArticle = () => {
       <Form>
       <Form.Field>
         <label>Title</label>
-          <input placeholder='Title'/>
+          <Input id="title" placeholder='Title'/>
         </Form.Field>
         <Form.Field>
           <label>Content</label>
-          <input placeholder='Content'/>
+          <textarea id="body" placeholder='Content'/>
         </Form.Field>
-          <Button type='submit'>Submit</Button>
+          <Button id="post" type='submit'>Post</Button>
     </Form>
     </div>
   )
