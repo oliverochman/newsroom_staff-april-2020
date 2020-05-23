@@ -13,11 +13,14 @@ h6 {
 p {
   font-family: "EB Garamond", serif;
 }
-.ui.centered.divided.three.column.grid {
+.header {
   background-color: #409d9b;
   padding: 20px;
 }
-a.active{
-  color: aliceblue;
-  font-family: "Quattrocento", serif;
+
+.writing-container {
+  float: left; 
+  padding-left: 20px; 
+  padding-top: 40px;
+  width: 40% !important;
 }

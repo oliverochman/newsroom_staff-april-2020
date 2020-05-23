@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Input } from "semantic-ui-react";
+import { Form, Button, Input, Container } from "semantic-ui-react";
 import axios from "axios";
 
 const CreateArticle = () => {
@@ -17,22 +17,22 @@ const CreateArticle = () => {
   };
 
   return (
-    <div>
+    <Container className="writing-container">
       <Form onSubmit={onSubmitHandler}>
         <Form.Field>
-          <label>Title</label>
-          <Input id="title" name="title" placeholder="Title" required />
+          <label>Article title</label>
+          <Input id="title" name="title" placeholder="Put your title here" required />
         </Form.Field>
         <Form.Field>
-          <label>Content</label>
-          <textarea id="body" name="body" placeholder="Content" required />
+          <label>Article content</label>
+          <textarea id="body" name="body" placeholder="Write your article here" required />
         </Form.Field>
         <Button id="post" type="submit">
-          Post
+          Post Article
         </Button>
         <p id="message">{message}</p>
       </Form>
-    </div>
+    </Container>
   );
 };
 

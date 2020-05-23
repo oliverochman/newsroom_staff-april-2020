@@ -1,12 +1,13 @@
 import React from 'react';
+import Header from './components/Header'
 import CreateArticle from './components/CreateArticle'
 
 
 function App() {
   return (
     <div className="App">
-      Daily News Sense
-       <CreateArticle/>
+      <Header/>
+      <CreateArticle/>
     </div>
   );
 }
