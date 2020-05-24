@@ -1,24 +1,11 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button, Input } from "semantic-ui-react";
-import axios from "axios";
 
-const WritingForm = () => {
-  const [message, setMessage] = useState("");
-
-  const onSubmitHandler = async (e) => {
-    try {
-      const response = await axios.post("/articles", {
-        params: { title: e.target.title.value, body: e.target.body.value },
-      });
-      setMessage(response.data.message);
-    } catch (error) {
-      setMessage(error.response.data.message);
-    }
-  };
+const WritingForm = (props) => {
 
   return (
-    <Form onSubmit={onSubmitHandler}>
+    <Form onSubmit={props.onSubmitHandler}>
         <Form.Field>
           <label>Article title</label>
           <Input id="title" name="title" placeholder="Put your title here"/>
@@ -30,7 +17,7 @@ const WritingForm = () => {
         <Button id="post" type="submit">
           Post Article
         </Button>
-        <p id="message">{message}</p>
+        <p id="message">{props.message}</p>
     </Form>
   )
 }
