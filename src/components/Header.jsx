@@ -1,38 +1,45 @@
 import React from "react";
 import { Menu, Button, Container } from "semantic-ui-react";
-import auth from '../modules/auth'
-import { Redirect } from 'react-router-dom'
+import auth from "../modules/auth";
+import { Redirect } from "react-router-dom";
 
 const Header = (props) => {
   const logOut = async () => {
     try {
-      await auth.signOut()
-      props.setAuthenticated(false)
-    } catch(error) {
-      console.log(error)
+      await auth.signOut();
+      props.setAuthenticated(false);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
-  const redirect = !props.authenticated && <Redirect to={{pathname: '/'}}/>
+  const redirect = !props.authenticated && <Redirect to={{ pathname: "/" }} />;
 
   return (
     <Container className="header">
       {redirect}
       <Menu className="header" celled stackable>
-        <Menu.Item >
+        <Menu.Item>
           <h1>Daily News Sense</h1>
         </Menu.Item>
         {props.authenticated && (
           <>
-            <Menu.Item active>
-              Write
-            </Menu.Item>
-            <Menu.Item position="right" id="logout" basic inverted onClick={() => logOut()}>
-                <h4>Log out <br/>{props.uid}</h4>
+            <Menu.Item active>Write</Menu.Item>
+            <Menu.Item
+              position="right"
+              id="logout"
+              basic
+              inverted
+              onClick={() => logOut()}
+            >
+              <h4>
+                Log out <br />
+                {props.uid}
+              </h4>
             </Menu.Item>
           </>
         )}
-    </Menu>
+      </Menu>
     </Container>
   );
 };
