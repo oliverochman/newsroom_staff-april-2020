@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Label, Input } from 'semantic-ui-react';
+import { Form, Button, Segment, Input, Grid } from 'semantic-ui-react';
 import auth from '../modules/auth'
 import { Redirect } from 'react-router-dom' 
 
@@ -20,15 +20,20 @@ const LoginForm = (props) => {
 
   return (
     <>
-      {redirect}
-      <Form  onSubmit={logIn} id="login-form" widths='equal' >
-        <Label>Email</Label>
-        <Input name='email' type='email' id='email'></Input>
-        <Label>Password</Label>
-        <Input name='password' type='password' id='password'></Input>
-        <Button id='submit'>Submit</Button>
-        <p id="error-message">{message}</p>
-      </Form>
+        {redirect}
+    <Grid className="login-container" verticalAlign="middle">
+      <Grid.Column align="center">
+        <Form  onSubmit={logIn} id="login-form">
+          <h1>Log in</h1>
+          <h4>Email</h4>
+          <Input name='email' type='email' id='email'></Input>
+          <h4>Password</h4>
+          <Input name='password' type='password' id='password'></Input>
+          <Button id='submit'>Submit</Button>
+          <p id="error-message">{message}</p>
+        </Form>
+      </Grid.Column>
+    </Grid>
     </>
   )
 }

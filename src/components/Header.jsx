@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button } from "semantic-ui-react";
+import { Menu, Button, Container } from "semantic-ui-react";
 import auth from '../modules/auth'
 import { Redirect } from 'react-router-dom'
 
@@ -16,24 +16,24 @@ const Header = (props) => {
   const redirect = !props.authenticated && <Redirect to={{pathname: '/'}}/>
 
   return (
-    <>
+    <Container className="header">
       {redirect}
-      <Grid className="header" padded>
-        <Grid.Column width={5}>
-          <h1 id="header">Daily News Sense</h1>
-        </Grid.Column>
-        <Grid.Row celled columns='equal'>
-          <Grid.Column>
-            Write
-          </Grid.Column>
-          <Grid.Column width={4}>
-            {props.authenticated && (
-              <Button basic inverted onClick={() => logOut()}>Log out {props.uid}</Button>
-              )}
-          </Grid.Column>
-        </Grid.Row>
-    </Grid>
-    </>
+      <Menu className="header" celled stackable>
+        <Menu.Item >
+          <h1>Daily News Sense</h1>
+        </Menu.Item>
+        {props.authenticated && (
+          <>
+            <Menu.Item active>
+              Write
+            </Menu.Item>
+            <Menu.Item position="right" id="logout" basic inverted onClick={() => logOut()}>
+                <h4>Log out <br/>{props.uid}</h4>
+            </Menu.Item>
+          </>
+        )}
+    </Menu>
+    </Container>
   );
 };
 export default Header;

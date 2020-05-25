@@ -82,7 +82,7 @@ describe('Journalist authenticates', () => {
       })
       cy.route({
         method: "DELETE",
-        url: "http://localhost:3000/api/auth*",
+        url: "http://localhost:3000/api/auth/*",
         response: "fixture:logout.json",
         headers: {
           uid: "user@mail.com"
@@ -96,16 +96,12 @@ describe('Journalist authenticates', () => {
     })
 
     it('clicking the Log out button', () => {
-      cy.get('.header').within(() => {
-        cy.get('button').contains('Log out user@mail.com').click()
-        cy.get('button').contains('Log out user@mail.com').should('not.exist')
-      })
+      cy.get('#logout').contains('Log out user@mail.com').click()
+      cy.get('#logout').should('not.exist')
     })
 
     it('and is redirected to login page', () => {
-      cy.get('.header').within(() => {
-        cy.get('button').contains('Log out user@mail.com').click()
-      })
+      cy.get('#logout').contains('Log out user@mail.com').click()
       cy.get('#login-form').should('be.visible')
     })
   })
