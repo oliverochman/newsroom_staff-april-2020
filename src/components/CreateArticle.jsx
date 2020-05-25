@@ -9,7 +9,7 @@ const CreateArticle = () => {
   const onSubmitHandler = async (e) => {
     try {
       const response = await axios.post("/articles", {
-        params: { title: e.target.title.value, body: e.target.body.value },
+        title: e.target.title.value, body: e.target.body.value
       });
       setMessage(response.data.message);
     } catch (error) {
