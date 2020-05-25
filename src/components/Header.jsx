@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Button, Container } from "semantic-ui-react";
+import { Menu, Container } from "semantic-ui-react";
 import auth from "../modules/auth";
 import { Redirect } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const Header = (props) => {
   return (
     <Container className="header">
       {redirect}
-      <Menu className="header" celled stackable>
+      <Menu className="header" stackable>
         <Menu.Item>
           <h1>Daily News Sense</h1>
         </Menu.Item>
@@ -28,8 +28,6 @@ const Header = (props) => {
             <Menu.Item
               position="right"
               id="logout"
-              basic
-              inverted
               onClick={() => logOut()}
             >
               <h4>

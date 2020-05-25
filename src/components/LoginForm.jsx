@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Segment, Input, Grid } from "semantic-ui-react";
+import { Form, Button, Input, Grid } from "semantic-ui-react";
 import auth from "../modules/auth";
 import { Redirect } from "react-router-dom";
 
