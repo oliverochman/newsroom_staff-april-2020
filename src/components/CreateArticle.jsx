@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import WritingForm from "./WritingForm";
-import { Container } from "semantic-ui-react";
+import { Container, Image } from "semantic-ui-react";
 
 const CreateArticle = () => {
   const [message, setMessage] = useState("");
@@ -43,14 +43,28 @@ const CreateArticle = () => {
   };
 
   return (
-    <Container className="writing-container">
-      <WritingForm
-        onSubmitHandler={onSubmitHandler}
-        handleChange={handleChange}
-        message={message}
-        imagePreview={imagePreview}
-      />
-    </Container>
+    <>
+      <Container className="writing-container">
+        <WritingForm
+          onSubmitHandler={onSubmitHandler}
+          handleChange={handleChange}
+          message={message}
+        />
+      </Container>
+      <Container className="writing-container">
+        {imagePreview === "" ? null : (
+          <>
+            <p>Image Preview</p>
+            <Image
+              id="preview-image"
+              style={{ display: "inline" }}
+              src={imagePreview}
+              alt="PreviewImage"
+            />
+          </>
+        )}
+      </Container>
+    </>
   );
 };
 

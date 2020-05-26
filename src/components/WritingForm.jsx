@@ -31,14 +31,6 @@ const WritingForm = (props) => {
         </Button>
         <p id="message">{props.message}</p>
       </Form>
-      {props.imagePreview === "" ? null : (
-        <Image
-          id="preview-image"
-          style={{ display: "inline", float: "right" }}
-          src={props.imagePreview}
-          alt="PreviewImage"
-        />
-      )}
     </>
   );
 };
