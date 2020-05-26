@@ -1,7 +1,8 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import WritingForm from './WritingForm'
-import { Container } from 'semantic-ui-react'
+import { Container, Button } from 'semantic-ui-react'
+import { Link } from "react-router-dom";
 
 const CreateArticle = () => {
   const [message, setMessage] = useState("");
@@ -12,7 +13,7 @@ const CreateArticle = () => {
       const response = await axios.post(
         "/articles",
         { title: e.target.title.value, body: e.target.body.value },
-        { headers: headers}
+        { headers: headers }
       );
       setMessage(response.data.message);
     } catch (error) {
@@ -21,9 +22,14 @@ const CreateArticle = () => {
   };
 
   return (
-    <Container className="writing-container">
-      <WritingForm onSubmitHandler={onSubmitHandler} message={message}/>
-    </Container>
+    <>
+      <Container className="writing-container">
+        <WritingForm onSubmitHandler={onSubmitHandler} message={message} />
+      </Container>
+      <Link to="/subscription">
+        <button>Buy Subscription</button>
+      </Link>
+    </>
   );
 };
 
