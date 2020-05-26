@@ -35,7 +35,8 @@ describe("Journalist can create an article", () => {
     cy.get("textarea#body").type(
       "This is the body this is the body this is the body this is the body this is the body."
     );
-    cy.get('select#category').click()
+    cy.get('#category').click()
+    cy.get('#category > .visible > :nth-child(2)').click()
     cy.get("#post").click();
     cy.get("#message").should("contain", "Article successfully created!");
   });

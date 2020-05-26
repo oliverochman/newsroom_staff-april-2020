@@ -1,14 +1,22 @@
 
 import React from "react";
-import { Form, Button, Input } from "semantic-ui-react";
+import { Form, Button, Input, Dropdown } from "semantic-ui-react";
 
 const WritingForm = (props) => {
-
+  const cats = ["Other", "Sport", "Local", "Politics", "Economy", "World", "Entertainment"]
+  
+  const categories = cats.map((category) => {
+    return { key: category, text: category, value: category.toLowerCase() }
+  })
+  
   return (
     <Form onSubmit={props.onSubmitHandler}>
         <Form.Field>
           <label>Article title</label>
           <Input id="title" name="title" placeholder="Put your title here"/>
+        </Form.Field>
+        <Form.Field>
+          <Dropdown selection id="category" name="category" placeholder="Category" options={categories}></Dropdown>
         </Form.Field>
         <Form.Field>
           <label>Article body</label>
