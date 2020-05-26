@@ -14,6 +14,11 @@ const WritingForm = (props) => {
           <label>Article body</label>
           <textarea id="body" name="body" placeholder="Write your article here"/>
         </Form.Field>
+
+        <Form.Field>
+          <label>Article image</label>
+          <input id="image" name="image" type="file" />
+        </Form.Field>
         <Button id="post" type="submit">
           Post Article
         </Button>
