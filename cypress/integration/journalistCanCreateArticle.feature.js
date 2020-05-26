@@ -65,4 +65,19 @@ describe("Journalist can create an article", () => {
     cy.get("#post").click();
     cy.get("#message").should("contain", "Body can't be blank");
   });
+
+  it("unsuccessfully without uploading image", () => {
+    cy.route({
+      method: "POST",
+      url: "http://localhost:3000/api/articles*",
+      response: "fixture:image_message.json",
+      status: 400
+    });
+    cy.get("input#title").type("This is the title");
+    cy.get("textarea#body").type(
+      "This is the body this is the body this is the body this is the body this is the body."
+    );
+    cy.get("#post").click();
+    cy.get("#message").should("contain", "Image can't be blank");
+  });
 });
