@@ -36,11 +36,12 @@ describe("Journalist can create an article", () => {
       "This is the body this is the body this is the body this is the body this is the body."
     );
     cy.file_upload("img.jpeg", "#image-upload", "image/jpeg");
+    cy.get("#preview-image").should("be.visible");
     cy.get("#post").click();
     cy.get("#message").should("contain", "Article successfully created!");
   });
 
-  xit("unsuccessfully without entering any title", () => {
+  it("unsuccessfully without entering any title", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/articles*",
@@ -54,7 +55,7 @@ describe("Journalist can create an article", () => {
     cy.get("#message").should("contain", "Title can't be blank");
   });
 
-  xit("unsuccessfully without entering any body text", () => {
+  it("unsuccessfully without entering any body text", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/articles*",
@@ -66,7 +67,7 @@ describe("Journalist can create an article", () => {
     cy.get("#message").should("contain", "Body can't be blank");
   });
 
-  xit("unsuccessfully without uploading image", () => {
+  it("unsuccessfully without uploading image", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/articles*",

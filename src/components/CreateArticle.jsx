@@ -16,7 +16,6 @@ const CreateArticle = () => {
     });
 
   const handleChange = (e) => {
-    debugger;
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 

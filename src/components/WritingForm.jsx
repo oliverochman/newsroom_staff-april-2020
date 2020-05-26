@@ -33,6 +33,7 @@ const WritingForm = (props) => {
       </Form>
       {props.imagePreview === "" ? null : (
         <Image
+          id="preview-image"
           style={{ display: "inline", float: "right" }}
           src={props.imagePreview}
           alt="PreviewImage"
