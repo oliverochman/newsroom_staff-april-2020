@@ -35,6 +35,7 @@ describe("Journalist can create an article", () => {
     cy.get("textarea#body").type(
       "This is the body this is the body this is the body this is the body this is the body."
     );
+    cy.file_upload('img.jpeg', '#image-upload', 'image/jpeg');
     cy.get("#post").click();
     cy.get("#message").should("contain", "Article successfully created!");
   });
