@@ -22,6 +22,7 @@ const CreateArticle = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.persist();
+      const category = document.getElementById('category').firstElementChild.innerText.toLowerCase()
       const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
       let encodedImage;
       if (e.target.image.files[0]) {
@@ -33,6 +34,7 @@ const CreateArticle = () => {
           title: e.target.title.value,
           body: e.target.body.value,
           image: encodedImage,
+          category: category,
         },
         { headers: headers }
       );
