@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
 
-function App() {
+const App = () => {
   const [uid, setUid] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -39,14 +39,13 @@ function App() {
           path="/"
           render={() => (
             <LoginForm
-              setAuthenticated={setAuthenticated}
               setUid={setUid}
               authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
             />
           )}
         />
         <Route
-          authenticated={authenticated}
           path="/write"
           component={CreateArticle}
         />

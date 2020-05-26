@@ -12,7 +12,9 @@ const LoginForm = (props) => {
         e.target.email.value,
         e.target.password.value
       );
+      debugger
       props.setUid(response.data.uid);
+      debugger
       props.setAuthenticated(true);
     } catch (error) {
       setMessage(error.response.data.errors[0]);
