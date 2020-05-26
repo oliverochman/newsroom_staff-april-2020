@@ -16,7 +16,8 @@ const WritingForm = (props) => {
           <Input id="title" name="title" placeholder="Put your title here"/>
         </Form.Field>
         <Form.Field>
-          <Dropdown selection id="category" name="category" placeholder="Category" options={categories}></Dropdown>
+          <label>Category</label>
+          <Dropdown selection id="category" name="category" placeholder="Other" options={categories}></Dropdown>
         </Form.Field>
         <Form.Field>
           <label>Article body</label>

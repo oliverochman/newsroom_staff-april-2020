@@ -8,10 +8,11 @@ const CreateArticle = () => {
 
   const onSubmitHandler = async (e) => {
     try {
+      const category = document.getElementById('category').firstElementChild.innerText.toLowerCase()
       const headers = JSON.parse(localStorage.getItem('J-tockAuth-Storage'))
       const response = await axios.post(
         "/articles",
-        { title: e.target.title.value, body: e.target.body.value },
+        { title: e.target.title.value, body: e.target.body.value, category: category },
         { headers: headers}
       );
       setMessage(response.data.message);
