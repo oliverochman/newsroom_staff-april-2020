@@ -1,18 +1,36 @@
-import React, { useState }  from 'react'
+import React, { useState } from "react";
 import axios from "axios";
-import WritingForm from './WritingForm'
-import { Container } from 'semantic-ui-react'
+import WritingForm from "./WritingForm";
+import { Container } from "semantic-ui-react";
 
 const CreateArticle = () => {
   const [message, setMessage] = useState("");
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
   const onSubmitHandler = async (e) => {
     try {
-      const headers = JSON.parse(localStorage.getItem('J-tockAuth-Storage'))
+      e.persist();
+      const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+      let encodedImage;
+      if (e.target.image.files[0]) {
+        encodedImage = await toBase64(e.target.image.files[0]);
+      }
+      debugger;
       const response = await axios.post(
         "/articles",
-        { title: e.target.title.value, body: e.target.body.value },
-        { headers: headers}
+        {
+          title: e.target.title.value,
+          body: e.target.body.value,
+          image: encodedImage,
+        },
+        { headers: headers }
       );
       setMessage(response.data.message);
     } catch (error) {
@@ -22,7 +40,7 @@ const CreateArticle = () => {
 
   return (
     <Container className="writing-container">
-      <WritingForm onSubmitHandler={onSubmitHandler} message={message}/>
+      <WritingForm onSubmitHandler={onSubmitHandler} message={message} />
     </Container>
   );
 };
