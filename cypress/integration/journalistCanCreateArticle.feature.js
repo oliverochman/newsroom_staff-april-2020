@@ -71,7 +71,7 @@ describe("Journalist can create an article", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/articles*",
-      response: "fixture:image_message.json",
+      response: "fixture:image_blank_message.json",
       status: 400,
     });
     cy.get("input#title").type("This is the title");

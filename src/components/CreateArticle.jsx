@@ -15,7 +15,7 @@ const CreateArticle = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const handleChange = (e) => {
+  const handleUploadChange = (e) => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -47,7 +47,7 @@ const CreateArticle = () => {
       <Container className="writing-container">
         <WritingForm
           onSubmitHandler={onSubmitHandler}
-          handleChange={handleChange}
+          handleUploadChange={handleUploadChange}
           message={message}
         />
       </Container>

@@ -15,7 +15,7 @@ const WritingForm = (props) => {
             id="image-upload"
             name="image"
             type="file"
-            onChange={props.handleChange}
+            onChange={props.handleUploadChange}
           />
         </Form.Field>
         <Form.Field>
