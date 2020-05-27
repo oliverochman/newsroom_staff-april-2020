@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Header, Form, Button, Segment } from "semantic-ui-react";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -11,12 +10,11 @@ import axios from "axios";
 const SubscriptionForm = props => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let userEmail = JSON.parse(localStorage.getItem("J-tockAuth-Storage")).uid;
-  const [message, setMessage] = useState(undefined)
+  const [message, setMessage] = useState('')
 
   const submitPayment = async event => {
     event.preventDefault();
     const response = await props.stripe.createToken()
-
     try {
       let paymentStatus = await axios.post(
         "/subscriptions",
@@ -28,7 +26,7 @@ const SubscriptionForm = props => {
       );
 
       if (paymentStatus.status === 200)
-        setMessage(paymentStatus.message);
+        setMessage(paymentStatus.data.message);
     } catch (error) {
       setMessage(error.response.data.message)
     }
@@ -47,10 +45,10 @@ const SubscriptionForm = props => {
           <h5>
             This yearly subscription will allow you to access all the amazing ultra premium content in addition to our free content.
             </h5>
-  
+
           <div id="card-info">
             <label>Card Number: </label>
-            <CardNumberElement id="cardnumber" />
+            <CardNumberElement name="cardnumber" id="cardnumber" />
             <label>"Expiry Date: </label>
             <CardExpiryElement id="exp-date" />
             <label>CVC: </label>

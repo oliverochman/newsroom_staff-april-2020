@@ -7,13 +7,13 @@ import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
 import { Elements } from "react-stripe-elements";
 
+
 const App = () => {
   const [uid, setUid] = useState("");
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     async function validate() {
-      debugger;
       if (localStorage.hasOwnProperty("J-tockAuth-Storage")) {
         const tokenParams = JSON.parse(
           localStorage.getItem("J-tockAuth-Storage")
@@ -37,11 +37,13 @@ const App = () => {
         setAuthenticated={setAuthenticated}
       />
       <Switch>
-        <Route exact path="/subscription" component={
-            <Elements>
-              <SubscriptionForm />
-            </Elements>
-        } />
+        <Route exact path="/subscription" render={() => (
+          <Elements>
+            <SubscriptionForm />
+
+          </Elements>
+        )} 
+        />
         <Route
           exact
           path="/"
