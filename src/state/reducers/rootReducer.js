@@ -9,6 +9,7 @@ const rootReducer = async (state = initialState, action) => {
           action.payload.email,
           action.payload.password
         );
+        debugger
         return {
           ...state,
           authenticatedAs: response.data.role,

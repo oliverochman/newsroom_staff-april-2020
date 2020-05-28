@@ -15,11 +15,11 @@ const Header = (props) => {
   };
 
   const uid = useSelector(state => state.uid)
-
+  
   const redirect = !useSelector(state => state.authenticatedAs) && <Redirect to={{ pathname: "/" }} />;
-  debugger;
   return (
     <Container className="header">
+      
       {redirect}
       <Menu className="header" stackable>
         <Menu.Item>

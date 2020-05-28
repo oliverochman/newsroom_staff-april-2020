@@ -11,6 +11,7 @@ import configureStore from "./state/store/configureStore";
 
 axios.defaults.baseURL = "http://localhost:3000/api";
 const store = configureStore();
+window.store = store
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

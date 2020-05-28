@@ -7,11 +7,12 @@ const LoginForm = (props) => {
 
   const submitHandler = async e => {
     await props.dispatch({ type: "LOG_IN", payload: { email: e.target.email.value, password: e.target.password.value}})
-    debugger;
-    console.log(e)
   }
 
-  const redirect = useSelector(state => state.authenticatedAs) && (
+  const redirect = useSelector(state => { debugger; state.authenticatedAs})
+  git
+  
+  && (
     <Redirect to={{ pathname: "/write" }} />
   );
 
