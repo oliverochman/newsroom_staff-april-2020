@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Container } from "semantic-ui-react";
 import auth from "../modules/auth";
 import { Redirect } from "react-router-dom";
+import { connect, useSelector } from 'react-redux'
 
 const Header = (props) => {
   const logOut = async () => {
@@ -13,8 +14,10 @@ const Header = (props) => {
     }
   };
 
-  const redirect = !props.authenticated && <Redirect to={{ pathname: "/" }} />;
+  const uid = useSelector(state => state.uid)
 
+  const redirect = !useSelector(state => state.authenticatedAs) && <Redirect to={{ pathname: "/" }} />;
+  debugger;
   return (
     <Container className="header">
       {redirect}
@@ -22,7 +25,7 @@ const Header = (props) => {
         <Menu.Item>
           <h1>Daily News Sense</h1>
         </Menu.Item>
-        {props.authenticated && (
+        {useSelector(state => state.authenticatedAs) && (
           <>
             <Menu.Item active>Write</Menu.Item>
             <Menu.Item
@@ -32,7 +35,7 @@ const Header = (props) => {
             >
               <h4>
                 Log out <br />
-                {props.uid}
+                {uid}
               </h4>
             </Menu.Item>
           </>
@@ -41,4 +44,4 @@ const Header = (props) => {
     </Container>
   );
 };
-export default Header;
+export default connect()(Header);

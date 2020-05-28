@@ -1,12 +1,12 @@
 describe("Editor can see unpublished articles", () => {
   describe('when logged in as editor', () => {
     beforeEach(() => {
+      cy.login('editor');
       cy.route({
         method: "GET",
         url: "http://localhost:3000/api/admin/articles",
         response: "fixture:unpublished_article_list.json",
       });
-      cy.login('editor');
       cy.get("#review-nav").click();
     });
 
