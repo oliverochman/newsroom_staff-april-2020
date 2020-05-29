@@ -5,7 +5,7 @@ describe("Editor can see unpublished articles", () => {
       cy.route({
         method: "GET",
         url: "http://localhost:3000/api/admin/articles",
-        response: "fixture:unpublished_article_list.json",
+        response: "fixture:unpublished_articles.json",
       });
       cy.get("#review-nav").click();
     });
@@ -14,11 +14,11 @@ describe("Editor can see unpublished articles", () => {
       cy.get("#article-1").should("contain", "title 1");
       cy.get("#article-2").should("contain", "title 2");
     });
-
+ 
     it("article details are shown", () => {
-      cy.get('#article-1').within((block) => {
-        block.should('contain', 'Created at: ')
-        block.should('contain', 'Category:')
+      cy.get('#article-1').within(() => {
+        cy.get(".description").should('contain', 'Created at: ')
+        cy.get(".description").should('contain', 'Category:')
       })
     })
 
