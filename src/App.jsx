@@ -6,9 +6,6 @@ import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
 
 const App = (props) => {
-  const [uid, setUid] = useState("");
-  const [authenticated, setAuthenticated] = useState(false);
-
   useEffect(() => {
     async function validate() {
       if (localStorage.hasOwnProperty("J-tockAuth-Storage")) {
@@ -17,7 +14,13 @@ const App = (props) => {
         );
         try {
           const response = await auth.validateToken(tokenParams);
-          setAuthenticated(response.success);
+          props.dispatch({
+            type: "LOG_IN",
+            payload: {
+              authenticatedAs: response.data.role,
+              uid: response.data.uid,
+            },
+          });
         } catch (error) {
           console.log(error);
         }
@@ -34,11 +37,7 @@ const App = (props) => {
           exact
           path="/"
           render={() => (
-            <LoginForm
-              setUid={setUid}
-              authenticated={authenticated}
-              setAuthenticated={setAuthenticated}
-            />
+            <LoginForm />
           )}
         />
         <Route

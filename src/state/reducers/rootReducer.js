@@ -7,7 +7,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         authenticatedAs: action.payload.authenticatedAs,
         uid: action.payload.uid
-      }
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        uid: "",
+        authenticatedAs: ""
+      };
     default:
       return state;
   }

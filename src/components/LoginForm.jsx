@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { Form, Button, Input, Grid } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import auth from "../modules/auth"
+import auth from "../modules/auth";
 
 const LoginForm = (props) => {
   const [loginMessage, setLoginMessage] = useState("");
-  const authenticatedAs = useSelector(state => state.authenticatedAs)
-  const redirect = authenticatedAs && (
-    <Redirect to={{ pathname: "/write" }} />
-  );
+  const authenticatedAs = useSelector(state => state.authenticatedAs);
+  const redirect = authenticatedAs && <Redirect to={{ pathname: "/write" }} />;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -18,15 +16,14 @@ const LoginForm = (props) => {
         e.target.email.value,
         e.target.password.value
       );
-      if (response.successful) {
-        props.dispatch({
-          type: "LOG_IN",
-          payload: {
-            setAuthenticatedAs: response.data.role,
-            uid: response.data.uid,
-          },
-        });
-      }
+      props.dispatch({
+        type: "LOG_IN",
+        payload: {
+          authenticatedAs: response.data.role,
+          uid: response.data.uid,
+        },
+      });
+      let a = authenticatedAs
     } catch (error) {
       setLoginMessage(error.response.data.errors[0]);
     }

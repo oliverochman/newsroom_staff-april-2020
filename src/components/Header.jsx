@@ -8,14 +8,16 @@ const Header = (props) => {
   const logOut = async () => {
     try {
       await auth.signOut();
-      props.setAuthenticated(false);
+      props.dispatch({type: "LOGOUT" })
     } catch (error) {
       console.log(error);
     }
   };
 
+  const authenticatedAs = useSelector((state) => state.authenticatedAs)
   const uid = useSelector((state) => state.uid);
-  const redirect = useSelector((state) => state.authenticatedAs) && (
+
+  const redirect = !authenticatedAs && (
     <Redirect to={{ pathname: "/" }} />
   );
 
@@ -26,7 +28,7 @@ const Header = (props) => {
         <Menu.Item>
           <h1>Daily News Sense</h1>
         </Menu.Item>
-        {useSelector((state) => state.authenticatedAs) && (
+        {authenticatedAs && (
           <>
             <Menu.Item active>Write</Menu.Item>
             <Menu.Item position="right" id="logout" onClick={() => logOut()}>
@@ -41,10 +43,5 @@ const Header = (props) => {
     </Container>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    state: state,
-  };
-};
 
-export default connect(mapStateToProps)(Header);
+export default connect()(Header);
