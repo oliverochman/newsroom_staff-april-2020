@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
 
-const App = () => {
+const App = (props) => {
   const [uid, setUid] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -28,11 +28,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header
-        uid={uid}
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
-      />
+      <Header/>
       <Switch>
         <Route
           exact
