@@ -1,30 +1,7 @@
 describe("Journalist can create an article", () => {
   beforeEach(() => {
-    cy.server();
-    cy.visit("/");
-    cy.route({
-      method: "POST",
-      url: "http://localhost:3000/api/auth/*",
-      response: "fixture:successful_login.json",
-      headers: {
-        uid: "user@mail.com",
-      },
-    });
-    cy.route({
-      method: "GET",
-      url: "http://localhost:3000/api/auth/*",
-      response: "fixture:successful_login.json",
-      headers: {
-        uid: "user@mail.com",
-      },
-    });
-    cy.get("#login-form").within(() => {
-      cy.get("#email").type("user@mail.com");
-      cy.get("#password").type("password");
-      cy.get("Button").contains("Submit").click();
-    });
+    cy.login('journalist');
   });
-
 
   it("successfully with title, body, image and category", () => {
     cy.route({

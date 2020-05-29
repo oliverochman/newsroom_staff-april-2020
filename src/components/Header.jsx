@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Menu, Container } from "semantic-ui-react";
 import auth from "../modules/auth";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 
 const Header = (props) => {
@@ -30,7 +30,9 @@ const Header = (props) => {
         </Menu.Item>
         {authenticatedAs && (
           <>
-            <Menu.Item active>Write</Menu.Item>
+            <Menu.Item id="write-nav"><NavLink to="/write">Write</NavLink></Menu.Item>
+            {authenticatedAs == 'editor' && <Menu.Item id="review-nav"><NavLink to="/review">Review</NavLink></Menu.Item> }
+
             <Menu.Item position="right" id="logout" onClick={() => logOut()}>
               <h4>
                 Log out <br />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "./components/LoginForm";
 import CreateArticle from "./components/CreateArticle";
+import Review from "./components/Review"
 import Header from "./components/Header";
 import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
@@ -44,6 +45,7 @@ const App = (props) => {
           path="/write"
           component={CreateArticle}
         />
+        <Route path="/review" component={Review} />
       </Switch>
     </div>
   );
