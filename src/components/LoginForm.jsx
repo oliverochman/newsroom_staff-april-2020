@@ -6,7 +6,7 @@ import auth from "../modules/auth";
 
 const LoginForm = (props) => {
   const [loginMessage, setLoginMessage] = useState("");
-  const authenticatedAs = useSelector(state => state.authenticatedAs);
+  const authenticatedAs = useSelector((state) => state.authenticatedAs);
   const redirect = authenticatedAs && <Redirect to={{ pathname: "/write" }} />;
 
   const submitHandler = async (e) => {
@@ -16,14 +16,20 @@ const LoginForm = (props) => {
         e.target.email.value,
         e.target.password.value
       );
-      props.dispatch({
-        type: "LOG_IN",
-        payload: {
-          authenticatedAs: response.data.role,
-          uid: response.data.uid,
-        },
-      });
-      let a = authenticatedAs
+      if (
+        response.data.role == "journalist" ||
+        response.data.role == "editor"
+      ) {
+        props.dispatch({
+          type: "LOG_IN",
+          payload: {
+            authenticatedAs: response.data.role,
+            uid: response.data.uid,
+          },
+        });
+      } else {
+        setLoginMessage("Invalid login credentials");
+      }
     } catch (error) {
       setLoginMessage(error.response.data.errors[0]);
     }

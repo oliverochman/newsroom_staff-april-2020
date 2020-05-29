@@ -1,0 +1,12 @@
+#no-articles {
+  font-size: x-large;
+}
+
+#review-page {
+  padding: 40px;
+  background-color: red;
+}
+
+.description {
+  color: darkgray
+}

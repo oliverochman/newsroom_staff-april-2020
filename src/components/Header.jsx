@@ -8,18 +8,16 @@ const Header = (props) => {
   const logOut = async () => {
     try {
       await auth.signOut();
-      props.dispatch({type: "LOGOUT" })
+      props.dispatch({ type: "LOGOUT" });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const authenticatedAs = useSelector((state) => state.authenticatedAs)
+  const authenticatedAs = useSelector((state) => state.authenticatedAs);
   const uid = useSelector((state) => state.uid);
 
-  const redirect = !authenticatedAs && (
-    <Redirect to={{ pathname: "/" }} />
-  );
+  const redirect = !authenticatedAs && <Redirect to={{ pathname: "/" }} />;
 
   return (
     <Container className="header">
@@ -30,8 +28,18 @@ const Header = (props) => {
         </Menu.Item>
         {authenticatedAs && (
           <>
-            <Menu.Item id="write-nav"><NavLink to="/write">Write</NavLink></Menu.Item>
-            {authenticatedAs == 'editor' && <Menu.Item id="review-nav"><NavLink to="/review">Review</NavLink></Menu.Item> }
+            <Menu.Item id="write-nav" className="nav-btn">
+              <NavLink to="/write" className="navbar-text">
+                Write
+              </NavLink>
+            </Menu.Item>
+            {authenticatedAs == "editor" && (
+              <Menu.Item id="review-nav" className="nav-btn">
+                <NavLink to="/review" className="navbar-text">
+                  Review
+                </NavLink>
+              </Menu.Item>
+            )}
 
             <Menu.Item position="right" id="logout" onClick={() => logOut()}>
               <h4>
