@@ -38,6 +38,8 @@ Cypress.Commands.add("login", (role) => {
       uid: `${role}@mail.com`,
     },
   });
+  cy.clearCookies();
+  cy.clearLocalStorage();
   cy.visit("/");
   cy.get("#login-form").within(() => {
     cy.get("#email").type("user@mail.com");
