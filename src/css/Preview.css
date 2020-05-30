@@ -1,0 +1,15 @@
+#preview {
+  height: calc(100vh - 180px);
+  overflow: auto;
+}
+
+#image {
+  margin: 0;
+  padding: 0;
+}
+
+#body {
+  text-align: justify !important;
+  word-wrap: normal;
+  font-size: 18px;
+}
