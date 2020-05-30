@@ -18,7 +18,7 @@ describe("Editor can see unpublished articles", () => {
     it('can click and view an article on the review page',() => {
       cy.get('#article-1').click()
       cy.get('#preview').within(() => {
-        cy.get('#title').should('contain', "title 1")
+        cy.get('#preview-title').should('contain', "title 1")
         cy.get('#body').should('contain', "Lorem ipsum")
         cy.get('#image').should('be.visible')
       })
