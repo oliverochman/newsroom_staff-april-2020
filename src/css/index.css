@@ -14,7 +14,7 @@ p {
   font-family: "EB Garamond", serif;
 }
 
-.header {
+.header.menu {
   background-color: #409d9b !important;
   width: 100% !important;
 }
@@ -22,6 +22,10 @@ p {
 .header > * {
   font-family: "Quattrocento", serif;
   color: white !important;
+}
+
+.navbar-text {
+  color: white;
 }
 
 .writing-container {

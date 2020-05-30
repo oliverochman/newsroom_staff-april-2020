@@ -1,19 +1,23 @@
 import React from "react";
 import { Menu, Container } from "semantic-ui-react";
 import auth from "../modules/auth";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
+import { connect, useSelector } from "react-redux";
 
 const Header = (props) => {
   const logOut = async () => {
     try {
       await auth.signOut();
-      props.setAuthenticated(false);
+      props.dispatch({ type: "LOGOUT" });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const redirect = !props.authenticated && <Redirect to={{ pathname: "/" }} />;
+  const authenticatedAs = useSelector((state) => state.authenticatedAs);
+  const uid = useSelector((state) => state.uid);
+
+  const redirect = !authenticatedAs && <Redirect to={{ pathname: "/" }} />;
 
   return (
     <Container className="header">
@@ -22,17 +26,25 @@ const Header = (props) => {
         <Menu.Item>
           <h1>Daily News Sense</h1>
         </Menu.Item>
-        {props.authenticated && (
+        {authenticatedAs && (
           <>
-            <Menu.Item active>Write</Menu.Item>
-            <Menu.Item
-              position="right"
-              id="logout"
-              onClick={() => logOut()}
-            >
+            <Menu.Item id="write-nav" className="nav-btn">
+              <NavLink to="/write" className="navbar-text">
+                Write
+              </NavLink>
+            </Menu.Item>
+            {authenticatedAs == "editor" && (
+              <Menu.Item id="review-nav" className="nav-btn">
+                <NavLink to="/review" className="navbar-text">
+                  Review
+                </NavLink>
+              </Menu.Item>
+            )}
+
+            <Menu.Item position="right" id="logout" onClick={() => logOut()}>
               <h4>
                 Log out <br />
-                {props.uid}
+                {uid}
               </h4>
             </Menu.Item>
           </>
@@ -41,4 +53,5 @@ const Header = (props) => {
     </Container>
   );
 };
-export default Header;
+
+export default connect()(Header);

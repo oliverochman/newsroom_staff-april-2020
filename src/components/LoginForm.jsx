@@ -1,34 +1,46 @@
 import React, { useState } from "react";
 import { Form, Button, Input, Grid } from "semantic-ui-react";
-import auth from "../modules/auth";
 import { Redirect } from "react-router-dom";
+import { connect, useSelector } from "react-redux";
+import auth from "../modules/auth";
 
 const LoginForm = (props) => {
   const [message, setMessage] = useState("");
+  const authenticatedAs = useSelector((state) => state.authenticatedAs);
+  const redirect = authenticatedAs && <Redirect to={{ pathname: "/write" }} />;
 
-  const logIn = async (e) => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
       const response = await auth.signIn(
         e.target.email.value,
         e.target.password.value
       );
-      props.setUid(response.data.uid);
-      props.setAuthenticated(true);
+      if (
+        response.data.role == "journalist" ||
+        response.data.role == "editor"
+      ) {
+        props.dispatch({
+          type: "LOG_IN",
+          payload: {
+            authenticatedAs: response.data.role,
+            uid: response.data.uid,
+          },
+        });
+      } else {
+        setMessage("Invalid login credentials");
+      }
     } catch (error) {
       setMessage(error.response.data.errors[0]);
     }
   };
-
-  const redirect = props.authenticated && (
-    <Redirect to={{ pathname: "/write" }} />
-  );
 
   return (
     <>
       {redirect}
       <Grid className="login-container" verticalAlign="middle">
         <Grid.Column align="center">
-          <Form onSubmit={logIn} id="login-form">
+          <Form onSubmit={(e) => submitHandler(e)} id="login-form">
             <h1>Log in</h1>
             <h4>Email</h4>
             <Input name="email" type="email" id="email"></Input>
@@ -42,4 +54,5 @@ const LoginForm = (props) => {
     </>
   );
 };
-export default LoginForm;
+
+export default connect()(LoginForm);
