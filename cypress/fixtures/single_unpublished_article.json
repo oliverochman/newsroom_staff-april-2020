@@ -1,0 +1,10 @@
+{
+  "article": {
+    "id": 1,
+    "title": "title 1",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in sapien sem. Phasellus a elit pulvinar, sagittis diam sed, tempus arcu. Pellentesque sapien ex, bibendum in iaculis vel, vehicula eu lorem. Nullam vestibulum neque nec pulvinar aliquet. Aenean nec fermentum neque. Proin ultricies est a diam faucibus, eu finibus dui feugiat. Morbi a ultricies lectus, eu egestas orci. Etiam consectetur porta nisi, quis hendrerit massa rutrum sit amet. Nam ac nisl ac sapien maximus egestas. Phasellus et pretium felis. Sed quam sem, volutpat sit amet pellentesque eget, mollis nec velit. Etiam at risus at urna sodales lobortis. Duis at ipsum in ex dignissim hendrerit quis vel urna. Cras scelerisque mi ac diam condimentum, dictum scelerisque tortor vulputate. Nulla tincidunt quis dolor at aliquam. Mauris accumsan ante in quam tempus, ac auctor tellus commodo. Phasellus scelerisque in libero a convallis. Curabitur consectetur ac leo ut tincidunt. Maecenas sodales enim nunc, vitae.",
+    "category": "sport",
+    "created_at": "2020-05-24 14:14",
+    "image": "https://images.unsplash.com/photo-1590743939484-06cad3c17a5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80"
+  }
+}
