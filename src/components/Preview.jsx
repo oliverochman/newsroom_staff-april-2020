@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Placeholder } from "semantic-ui-react";
+import { Container, Grid, Image } from "semantic-ui-react";
 import "../css/Preview.css";
 
 const Preview = ({ selectedArticle }) => {
@@ -7,10 +7,10 @@ const Preview = ({ selectedArticle }) => {
     <Container id="preview" align="center">
       <Grid>
         <Grid.Row centered>
-          <Placeholder id={"image"}>
-            <Placeholder.Image />
+          <Container id={"image"}>
+            <Image src={ selectedArticle.image }/>
             <h2 id={"preview-title"}>{selectedArticle.title}</h2>
-          </Placeholder>
+          </Container>
         </Grid.Row>
         <Grid.Row centered id="created-text">
           Created at: {selectedArticle.created_at}
