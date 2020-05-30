@@ -4,9 +4,9 @@ import axios from "axios";
 import "../css/Review.css";
 
 const Review = () => {
-  const [unpArticleList, setUnpArticleList] = useState([]);
+  const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
   useEffect(() => {
-    const fetchUnpArticleList = async () => {
+    const fetchUnpublishedArticleList = async () => {
       try {
         const headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
         const response = await axios.get(
@@ -16,20 +16,20 @@ const Review = () => {
             headers: headers,
           }
         );
-        setUnpArticleList(response.data.articles);
+        setUnpublishedArticleList(response.data.articles);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchUnpArticleList();
+    fetchUnpublishedArticleList();
   }, []);
 
-  const unpArticlesRender =
-    unpArticleList.length == 0 ? (
+  const unpublishedArticlesRender =
+    unpublishedArticleList.length == 0 ? (
       <p id="no-articles">There isn't any unpublished articles</p>
     ) : (
       <List divided relaxed>
-        {unpArticleList.map((article) => {
+        {unpublishedArticleList.map((article) => {
           return (
             <List.Item key={article.id} id={`article-${article.id}`}>
               <List.Icon
@@ -53,7 +53,7 @@ const Review = () => {
     <div id="review-page">
       <Grid columns={2}>
         <Grid.Column id="left">
-          <Container>{unpArticlesRender}</Container>
+          <Container>{unpublishedArticlesRender}</Container>
         </Grid.Column>
         <Grid.Column></Grid.Column>
       </Grid>

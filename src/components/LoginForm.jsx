@@ -5,7 +5,7 @@ import { connect, useSelector } from "react-redux";
 import auth from "../modules/auth";
 
 const LoginForm = (props) => {
-  const [loginMessage, setLoginMessage] = useState("");
+  const [message, setMessage] = useState("");
   const authenticatedAs = useSelector((state) => state.authenticatedAs);
   const redirect = authenticatedAs && <Redirect to={{ pathname: "/write" }} />;
 
@@ -28,10 +28,10 @@ const LoginForm = (props) => {
           },
         });
       } else {
-        setLoginMessage("Invalid login credentials");
+        setMessage("Invalid login credentials");
       }
     } catch (error) {
-      setLoginMessage(error.response.data.errors[0]);
+      setMessage(error.response.data.errors[0]);
     }
   };
 
@@ -47,7 +47,7 @@ const LoginForm = (props) => {
             <h4>Password</h4>
             <Input name="password" type="password" id="password"></Input>
             <Button id="submit">Submit</Button>
-            <p id="error-message">{loginMessage}</p>
+            <p id="error-message">{message}</p>
           </Form>
         </Grid.Column>
       </Grid>
