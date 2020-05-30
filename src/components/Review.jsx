@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { List, Container, Divider, Grid } from "semantic-ui-react";
+import { List, Container, Grid } from "semantic-ui-react";
 import axios from "axios";
 import "../css/Review.css";
 import Preview from "./Preview";
