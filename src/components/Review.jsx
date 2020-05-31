@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { List, Container, Grid } from "semantic-ui-react";
+import { List, Container, Grid, Button } from "semantic-ui-react";
 import axios from "axios";
 import "../css/Review.css";
 import Preview from "./Preview";
+import { Link } from "react-router-dom";
 
 const Review = () => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState();
-  const [previewMessage, setPreviewMessage] = useState("Select an article in the list to preview")
+  const [previewMessage, setPreviewMessage] = useState(
+    "Select an article in the list to preview"
+  );
 
   useEffect(() => {
     const fetchUnpublishedArticleList = async () => {
@@ -42,7 +45,7 @@ const Review = () => {
       });
       setSelectedArticle(response.data.article);
     } catch (error) {
-      setPreviewMessage(error.response.data.message)
+      setPreviewMessage(error.response.data.message);
     }
   };
 
@@ -66,7 +69,17 @@ const Review = () => {
               <List.Content>
                 <List.Header as="a">{article.title}</List.Header>
                 <List.Description class="description">
-                  Created at: {article.created_at}, Category: {article.category}
+                  Created at: {article.created_at}
+                  <Link
+                    to={{ pathname: `/article/${article.id}` }}
+                    id={"checkout-article-" + article.id}
+                    style={{ float: "right" }}
+                  >
+                    <Button size="tiny">Checkout Article</Button>
+                  </Link>
+                </List.Description>
+                <List.Description class="description">
+                  Category: {article.category}
                 </List.Description>
               </List.Content>
             </List.Item>
@@ -74,10 +87,12 @@ const Review = () => {
         })}
       </List>
     );
-  
+
   const previewRender = selectedArticle ? (
     <Preview selectedArticle={selectedArticle} />
-  ) : (<div id="preview-message">{previewMessage}</div>)
+  ) : (
+    <div id="preview-message">{previewMessage}</div>
+  );
 
   return (
     <div id="review-page">
