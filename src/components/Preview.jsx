@@ -7,16 +7,16 @@ const Preview = ({ selectedArticle }) => {
     <Container id="preview" align="center">
       <Grid>
         <Grid.Row centered>
-          <Container id={"image"}>
-            <Image src={ selectedArticle.image }/>
-            <h2 id={"preview-title"}>{selectedArticle.title}</h2>
+          <Container id="image">
+            <Image src={selectedArticle.image} />
+            <h2 id="preview-title">{selectedArticle.title}</h2>
           </Container>
         </Grid.Row>
         <Grid.Row centered id="created-text">
           Created at: {selectedArticle.created_at}
         </Grid.Row>
         <Grid.Row centered id="preview-body">
-          <p id={"body"} className="article-body">
+          <p id="body" className="article-body">
             {selectedArticle.body}
           </p>
         </Grid.Row>

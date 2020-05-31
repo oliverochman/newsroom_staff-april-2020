@@ -7,6 +7,7 @@ import Preview from "./Preview";
 const Review = () => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState();
+  const [previewMessage, setPreviewMessage] = useState("Select an article in the list to preview")
 
   useEffect(() => {
     const fetchUnpublishedArticleList = async () => {
@@ -28,7 +29,7 @@ const Review = () => {
     fetchUnpublishedArticleList();
   }, []);
 
-  const getSelectedArticle = async (id) => {
+  const fetchSelectedArticle = async (id) => {
     try {
       let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
       headers = {
@@ -41,7 +42,7 @@ const Review = () => {
       });
       setSelectedArticle(response.data.article);
     } catch (error) {
-      console.log(error);
+      setPreviewMessage(error.response.data.message)
     }
   };
 
@@ -55,7 +56,7 @@ const Review = () => {
             <List.Item
               key={article.id}
               id={`article-${article.id}`}
-              onClick={() => getSelectedArticle(article.id)}
+              onClick={() => fetchSelectedArticle(article.id)}
             >
               <List.Icon
                 name="exclamation"
@@ -73,10 +74,10 @@ const Review = () => {
         })}
       </List>
     );
-
-  const previewRender = selectedArticle && (
+  
+  const previewRender = selectedArticle ? (
     <Preview selectedArticle={selectedArticle} />
-  );
+  ) : (<div id="preview-message">{previewMessage}</div>)
 
   return (
     <div id="review-page">

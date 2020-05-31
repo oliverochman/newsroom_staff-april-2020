@@ -1,7 +1,14 @@
-#preview {
+#preview, #preview-message {
   height: calc(100vh - 180px);
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+#preview-message {
+  color: darkgray;
+  font-size: larger;
+  font-weight: bolder;
+  text-align: center;
 }
 
 #image {
