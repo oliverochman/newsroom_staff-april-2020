@@ -72,10 +72,11 @@ const Review = () => {
                   Created at: {article.created_at}
                   <Link
                     to={{ pathname: `/article/${article.id}` }}
-                    id={"checkout-article-" + article.id}
                     style={{ float: "right" }}
                   >
-                    <Button size="tiny">Checkout Article</Button>
+                    <Button size="tiny" id={"checkout-article-" + article.id}>
+                      Checkout Article
+                    </Button>
                   </Link>
                 </List.Description>
                 <List.Description class="description">

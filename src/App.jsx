@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
 import { connect } from "react-redux";
+import PublishArticle from "./components/PublishArticle";
 
 const App = (props) => {
   useEffect(() => {
@@ -43,6 +44,7 @@ const App = (props) => {
         <Route exact path="/" component={LoginForm} />
         <Route path="/write" component={CreateArticle} />
         <Route path="/review" component={Review} />
+        <Route path="/article/:id" component={PublishArticle} />
       </Switch>
     </div>
   );
