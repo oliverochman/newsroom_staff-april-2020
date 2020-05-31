@@ -16,11 +16,10 @@ describe("editor can publish articles", () => {
   describe("editor can checkout article", () => {
     it("can view checkout article", () => {
       cy.get("#checkout-article-1").click();
-      cy.get("#title").should("contain", "title 1");
+      cy.get("#preview-title").should("contain", "title 1");
       cy.get("#body").should("contain", "Lorem ipsum dolor");
-      cy.get("#category").should("contain", "sport");
-      cy.get("#article-class").parent().find("#free").should("be.checked");
-      //   cy.get('#article-class').should('have.attr', 'free', 'true')
+      cy.get("#category").should("contain", "Sport");
+      cy.get("#radio-free").should("be.checked");
     });
   });
 
@@ -36,17 +35,15 @@ describe("editor can publish articles", () => {
 
     it("change category and publish", () => {
       cy.get("#category").click();
-      cy.get("#category > .visible > :nth-child(2)").click();
+      cy.get("#category > .visible > :nth-child(4)").click();
       cy.get("#publish-btn").click();
       cy.get("#message").should("contain", "Article successfully published!");
     });
 
     it("change article class and publish", () => {
-      cy.get("#radio").check("premium");
+      cy.get('[type="radio"]').check("premium");
       cy.get("#publish-btn").click();
       cy.get("#message").should("contain", "Article successfully published!");
     });
   });
 });
-
-describe("journalist can't publish articles", () => {});
