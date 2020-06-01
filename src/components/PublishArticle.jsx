@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UpdateArticle from "./UpdateArticle";
-
+import createHeaders from "../modules/headers";
 import fetchWrapper from "../modules/fetchArticle";
 
 const PublishArticle = (props) => {
   const [selectedArticle, setSelectedArticle] = useState();
   const [message, setMessage] = useState("");
   const [radio, setRadio] = useState("free");
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  headers = {
-    ...headers,
-    "Content-type": "application/json",
-    Accept: "application/json",
-  };
 
   useEffect(() => {
     fetchWrapper(setSelectedArticle, setMessage, props.match.params.id);
@@ -25,16 +19,14 @@ const PublishArticle = (props) => {
         `/admin/articles/${props.match.params.id}`,
 
         {
-          params: {
-            activity: "PUBLISH",
-            premium: radio === "premium" ? true : false,
-            category: document
-              .getElementById("category")
-              .firstElementChild.innerText.toLowerCase(),
-          },
+          activity: "PUBLISH",
+          premium: radio === "premium" ? true : false,
+          category: document
+            .getElementById("category")
+            .firstElementChild.innerText.toLowerCase(),
         },
         {
-          headers: headers,
+          headers: createHeaders(),
         }
       );
       setMessage(response.data.message);

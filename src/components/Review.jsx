@@ -5,6 +5,7 @@ import "../css/Review.css";
 import Preview from "./Preview";
 import { Link } from "react-router-dom";
 import fetchWrapper from "../modules/fetchArticle";
+import createHeaders from "../modules/headers";
 
 const Review = () => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
@@ -16,14 +17,8 @@ const Review = () => {
   useEffect(() => {
     const fetchUnpublishedArticleList = async () => {
       try {
-        let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-        headers = {
-          ...headers,
-          "Content-type": "application/json",
-          Accept: "application/json",
-        };
         const response = await axios.get("/admin/articles", {
-          headers: headers,
+          headers: createHeaders(),
         });
         setUnpublishedArticleList(response.data.articles);
       } catch (error) {
