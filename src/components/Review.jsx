@@ -4,6 +4,7 @@ import axios from "axios";
 import "../css/Review.css";
 import Preview from "./Preview";
 import { Link } from "react-router-dom";
+import fetchWrapper from "../modules/fetchArticle";
 
 const Review = () => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
@@ -32,25 +33,8 @@ const Review = () => {
     fetchUnpublishedArticleList();
   }, []);
 
-  const fetchSelectedArticle = async (id) => {
-    try {
-      let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-      headers = {
-        ...headers,
-        "Content-type": "application/json",
-        Accept: "application/json",
-      };
-      const response = await axios.get(`/admin/articles/${id}`, {
-        headers: headers,
-      });
-      setSelectedArticle(response.data.article);
-    } catch (error) {
-      setPreviewMessage(error.response.data.message);
-    }
-  };
-
   const unpublishedArticlesRender =
-    unpublishedArticleList.length == 0 ? (
+    unpublishedArticleList.length === 0 ? (
       <p id="no-articles">There isn't any unpublished articles</p>
     ) : (
       <List divided relaxed>
@@ -59,7 +43,9 @@ const Review = () => {
             <List.Item
               key={article.id}
               id={`article-${article.id}`}
-              onClick={() => fetchSelectedArticle(article.id)}
+              onClick={() =>
+                fetchWrapper(setSelectedArticle, setPreviewMessage, article.id)
+              }
             >
               <List.Icon
                 name="exclamation"
@@ -71,7 +57,7 @@ const Review = () => {
                 <List.Description class="description">
                   Created at: {article.created_at}
                   <Link
-                    to={{ pathname: `/article/${article.id}` }}
+                    to={{ pathname: `/review/${article.id}` }}
                     style={{ float: "right" }}
                   >
                     <Button size="tiny" id={"checkout-article-" + article.id}>
