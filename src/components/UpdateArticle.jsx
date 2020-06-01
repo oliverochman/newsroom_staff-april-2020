@@ -13,7 +13,7 @@ const UpdateArticle = (props) => {
         </Container>
       </Grid.Column>
       <Grid.Column>
-        <Form onSubmit={props.onSubmitHandler}>
+        <Form onSubmit={(e) => props.onSubmitHandler(e)}>
           <Form.Field>
             <label>Category</label>
             <Dropdown
@@ -28,25 +28,18 @@ const UpdateArticle = (props) => {
             <input
               id="radio-free"
               label="Free"
-              name="radioGroup"
-              value="free"
+              name="premium"
+              value={true}
               type="radio"
-              checked={props.radio === "free"}
-              onChange={(e) => {
-                props.setRadio(e.target.value);
-              }}
+              defaultChecked
             />
             <label style={{ display: "inline" }}> Free </label>
             <input
               id="radio-premium"
               label="Premium"
-              name="radioGroup"
-              value="premium"
-              checked={props.radio === "premium"}
+              name="premium"
+              value={false}
               type="radio"
-              onChange={(e) => {
-                props.setRadio(e.target.value);
-              }}
             />
             <label style={{ display: "inline" }}> Premium</label>
           </Form.Field>

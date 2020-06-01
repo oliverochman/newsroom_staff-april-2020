@@ -7,20 +7,19 @@ import fetchWrapper from "../modules/fetchArticle";
 const PublishArticle = (props) => {
   const [selectedArticle, setSelectedArticle] = useState();
   const [message, setMessage] = useState("");
-  const [radio, setRadio] = useState("free");
 
   useEffect(() => {
     fetchWrapper(setSelectedArticle, setMessage, props.match.params.id);
   }, []);
 
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async (e) => {
     try {
       const response = await axios.put(
         `/admin/articles/${props.match.params.id}`,
 
         {
           activity: "PUBLISH",
-          premium: radio === "premium" ? true : false,
+          premium: e.target.premium.value,
           category: document
             .getElementById("category")
             .firstElementChild.innerText.toLowerCase(),
@@ -42,8 +41,6 @@ const PublishArticle = (props) => {
             onSubmitHandler={onSubmitHandler}
             selectedArticle={selectedArticle}
             message={message}
-            setRadio={setRadio}
-            radio={radio}
           />
         )}
       </div>
