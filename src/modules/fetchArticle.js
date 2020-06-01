@@ -1,16 +1,11 @@
 import axios from "axios";
+import createHeaders from "../modules/headers";
 
 const fetchWrapper = (setSelectedArticle, setPreviewMessage, id) => {
   let fetchSelectedArticle = async (id) => {
     try {
-      let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-      headers = {
-        ...headers,
-        "Content-type": "application/json",
-        Accept: "application/json",
-      };
       const response = await axios.get(`/admin/articles/${id}`, {
-        headers: headers,
+        headers: createHeaders(),
       });
       setSelectedArticle(response.data.article);
     } catch (error) {
