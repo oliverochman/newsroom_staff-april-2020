@@ -33,14 +33,14 @@ describe("editor can publish articles", () => {
       });
     });
 
-    it("change category and publish", () => {
+    xit("change category and publish", () => {
       cy.get("#category").click();
       cy.get("#category > .visible > :nth-child(4)").click();
       cy.get("#publish-btn").click();
       cy.get("#message").should("contain", "Article successfully published!");
     });
 
-    it("change article class and publish", () => {
+    xit("change article class and publish", () => {
       cy.get('[type="radio"]').last().check();
       cy.get("#publish-btn").click();
       cy.get("#message").should("contain", "Article successfully published!");

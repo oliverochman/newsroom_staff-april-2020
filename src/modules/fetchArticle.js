@@ -1,18 +1,23 @@
 import axios from "axios";
 import createHeaders from "../modules/headers";
 
-const fetchWrapper = (setSelectedArticle, setPreviewMessage, id) => {
-  let fetchSelectedArticle = async (id) => {
-    try {
-      const response = await axios.get(`/admin/articles/${id}`, {
-        headers: createHeaders(),
-      });
-      setSelectedArticle(response.data.article);
-    } catch (error) {
-      setPreviewMessage(error.response.data.message);
-    }
-  };
-  fetchSelectedArticle(id);
+
+const fetchSingleArticle = async (dispatchArticle, setErrorMessage, articleId) => {
+  try {
+    const response = await axios.get(`/admin/articles/${articleId}`, {
+      headers: createHeaders(),
+    });
+
+    dispatchArticle({
+      type: 'SINGLE_ARTICLE',
+      payload: {
+        article: response.data.article
+      }
+    });
+  } catch (error) {
+    setErrorMessage(error.response.data.message);
+  }
 };
 
-export default fetchWrapper;
+
+export default fetchSingleArticle;

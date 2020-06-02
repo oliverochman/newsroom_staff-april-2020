@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { connect, useDispatch } from "react-redux";
 import UpdateArticle from "./UpdateArticle";
 import createHeaders from "../modules/headers";
-import fetchWrapper from "../modules/fetchArticle";
+import fetchSingleArticle from "../modules/fetchArticle";
 
 const PublishArticle = (props) => {
-  const [selectedArticle, setSelectedArticle] = useState();
   const [message, setMessage] = useState("");
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchWrapper(setSelectedArticle, setMessage, props.match.params.id);
+    fetchSingleArticle(dispatch, setMessage, props.match.params.id);
   }, []);
 
   const onSubmitHandler = async (e) => {
@@ -36,16 +37,13 @@ const PublishArticle = (props) => {
   return (
     <>
       <div id="publish-page">
-        {selectedArticle && (
-          <UpdateArticle
-            onSubmitHandler={onSubmitHandler}
-            selectedArticle={selectedArticle}
-            message={message}
-          />
-        )}
+        <UpdateArticle
+          onSubmitHandler={onSubmitHandler}
+          message={message}
+        />
       </div>
     </>
   );
 };
 
-export default PublishArticle;
+export default connect()(PublishArticle);

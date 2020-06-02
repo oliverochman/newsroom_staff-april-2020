@@ -2,6 +2,11 @@ import initialState from "../store/initialState";
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "SINGLE_ARTICLE":
+      return {
+        ...state,
+        article: action.payload.article
+      }
     case "LOG_IN":
       return {
         ...state,
